@@ -1,0 +1,24 @@
+{
+  "name": "gulp-checklist",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CAPSLOCKUSER/gulp-checklist.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CAPSLOCKUSER/gulp-checklist/issues"
+  },
+  "homepage": "https://github.com/CAPSLOCKUSER/gulp-checklist#readme",
+  "dependencies": {
+    "gulp-contains": "^1.0.0",
+    "gulp-util": "^3.0.7",
+    "lodash": "^3.10.1"
+  }
+}
