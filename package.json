@@ -17,7 +17,6 @@
   },
   "homepage": "https://github.com/CAPSLOCKUSER/gulp-checklist#readme",
   "dependencies": {
-    "gulp-contains": "^1.0.0",
     "gulp-util": "^3.0.7",
     "lodash": "^3.10.1"
   }

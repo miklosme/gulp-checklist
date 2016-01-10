@@ -10,41 +10,39 @@ var PLUGIN_NAME = 'gulp-checklist';
 
 function gulpChecklist(options) {
 
-  var wrap = (options.wrap || '').split('*');
+  var wrap = (options.wrap || '*').split('*');
 
-  var search = _.map(options.list, function(item) {
+  var search = _.map(options.list, function (item) {
     return wrap.join(item);
   });
 
   let notFound = _.map(search, _.clone);
 
-  return through.obj(function(file, enc, cb) {
+  return through.obj(function (file, enc, cb) {
     if (file.isNull()) {
-      // return empty file
-      return cb(null, file);
-    }
-
-    if (file.isBuffer()) {
-      throw new PluginError(PLUGIN_NAME, 'Buffer not suported.');
+      cb(null, file);
+      return;
     }
 
     if (file.isStream()) {
-      file.contents = file.contents
-        .pipe(contains({
-          search: search,
-          onFound: function(string) {
-            notFound = _.without(notFound, string);
-            return false;
-          }
-        }))
-        .on('end', function() {
-          if (notFound.length > 0) {
-            throw new PluginError(PLUGIN_NAME, 'Some checklist items are not present: [' + notFound + ']');
-          }
-        });
+      this.emit('error', new PluginError(PLUGIN_NAME, 'Streams not supported!'));
+      return;
     }
 
-    return cb(null, file);
+    var content = file.contents.toString(enc);
+
+    _.forEach(search, function(item) {
+      if (content.indexOf(item) !== -1) {
+        notFound = _.without(notFound, item);
+      }
+    });
+
+    cb(null, file);
+  }, function (cb) {
+    if (notFound.length > 0) {
+      this.emit('error', new PluginError(PLUGIN_NAME, 'Not every items from checklist are found! [' + notFound + ']'));
+    }
+    cb();
   });
 }
 
