@@ -8,5 +8,5 @@ gulp.task('default', function () {
     .pipe(checklist({
       list: list,
       wrap: 'id="*"'
-    }))
+    }));
 });

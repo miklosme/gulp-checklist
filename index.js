@@ -2,7 +2,6 @@
 
 var _ = require('lodash');
 var through = require('through2');
-var contains = require('gulp-contains');
 var gutil = require('gulp-util');
 var PluginError = gutil.PluginError;
 
@@ -12,11 +11,17 @@ function gulpChecklist(options) {
 
   var wrap = (options.wrap || '*').split('*');
 
+  var onEnd = (options.onEnd || function(notFound) {
+    if (notFound.length > 0) {
+      this.emit('error', new PluginError(PLUGIN_NAME, 'Not every items from checklist are found! [' + notFound + ']'));
+    }
+  });
+
   var search = _.map(options.list, function (item) {
     return wrap.join(item);
   });
 
-  let notFound = _.map(search, _.clone);
+  var notFound = _.map(search, _.clone);
 
   return through.obj(function (file, enc, cb) {
     if (file.isNull()) {
@@ -39,9 +44,7 @@ function gulpChecklist(options) {
 
     cb(null, file);
   }, function (cb) {
-    if (notFound.length > 0) {
-      this.emit('error', new PluginError(PLUGIN_NAME, 'Not every items from checklist are found! [' + notFound + ']'));
-    }
+    onEnd();
     cb();
   });
 }
