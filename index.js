@@ -9,11 +9,17 @@ var PLUGIN_NAME = 'gulp-checklist';
 
 function gulpChecklist(options) {
 
+  if (Array.isArray(options)) {
+    options = {
+      list: options
+    };
+  }
+
   var wrap = (options.wrap || '*').split('*');
 
-  var onEnd = (options.onEnd || function(notFound) {
+  var onEnd = (options.onEnd || function(notFound, stream) {
     if (notFound.length > 0) {
-      this.emit('error', new PluginError(PLUGIN_NAME, 'Not every items from checklist are found! [' + notFound + ']'));
+      stream.emit('error', new PluginError(PLUGIN_NAME, 'Not every items from checklist are found! [' + notFound + ']'));
     }
   });
 
@@ -44,7 +50,7 @@ function gulpChecklist(options) {
 
     cb(null, file);
   }, function (cb) {
-    onEnd();
+    onEnd(notFound, this);
     cb();
   });
 }
