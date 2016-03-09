@@ -7,7 +7,15 @@ var PluginError = gutil.PluginError;
 
 var PLUGIN_NAME = 'gulp-checklist';
 
-function gulpChecklist(options) {
+function defaultOnEnd(notFound, stream) {
+  if (notFound.length > 0) {
+    var message = 'Not every items from checklist are found! ' + JSON.stringify(notFound);
+    stream.emit('error', new PluginError(PLUGIN_NAME, message));
+  }
+}
+
+function gulpChecklist(params) {
+  var options = params;
 
   if (Array.isArray(options)) {
     options = {
@@ -17,11 +25,7 @@ function gulpChecklist(options) {
 
   var wrap = (options.wrap || '*').split('*');
 
-  var onEnd = (options.onEnd || function(notFound, stream) {
-    if (notFound.length > 0) {
-      stream.emit('error', new PluginError(PLUGIN_NAME, 'Not every items from checklist are found! [' + notFound + ']'));
-    }
-  });
+  var onEnd = (options.onEnd || defaultOnEnd);
 
   var search = _.map(options.list, function (item) {
     return wrap.join(item);
@@ -36,7 +40,7 @@ function gulpChecklist(options) {
     }
 
     if (file.isStream()) {
-      this.emit('error', new PluginError(PLUGIN_NAME, 'Streams not supported!'));
+      this.emit('error', new PluginError(PLUGIN_NAME, 'Streams are not supported!'));
       return;
     }
 
