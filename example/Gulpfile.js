@@ -4,13 +4,12 @@ var checklist = require('../index.js');
 var list = require('./required_ids.json').id;
 
 gulp.task('default', function () {
-  gulp.src(['./webpage.html', './webpage2.html'])
+  gulp.src(['./webpage.html'])
     .pipe(checklist({
       list: list,
       wrap: 'id="*"',
       onEnd: function(notFound) {
-        console.log('not found', notFound);
+        console.log('The result is:', JSON.stringify(notFound));
       }
     }));
-  //.pipe(checklist(['foo', 'bar', 'id="baz"']));
 });
