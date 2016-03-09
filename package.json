@@ -1,7 +1,7 @@
 {
   "name": "gulp-checklist",
   "version": "1.1.0",
-  "description": "",
+  "description": "Ensure that a list of strings are still present in the source.",
   "main": "index.js",
   "scripts": {
     "test": "mocha",
