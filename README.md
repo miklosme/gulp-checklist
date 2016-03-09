@@ -1,4 +1,4 @@
-# gulp-checklist
+# gulp-checklist [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]
 
 Ensure that a list of strings are still present in the source.
 
@@ -34,3 +34,10 @@ Tip: Store your required strings in a JSON file, and simple get them with a `req
 ## License
 
 Released under the MIT license.
+
+
+[npm-url]: https://npmjs.org/package/gulp-checklist
+[npm-image]: http://img.shields.io/npm/v/gulp-checklist.svg?style=flat
+
+[travis-url]: http://travis-ci.org/CAPSLOCKUSER/gulp-checklist
+[travis-image]: http://img.shields.io/travis/CAPSLOCKUSER/gulp-checklist.svg?style=flat
