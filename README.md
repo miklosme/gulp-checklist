@@ -4,9 +4,7 @@ Ensure that a list of strings are still present in the source.
 
 Throws an error or calls a callback if a string has been deleted accidentally.
 
-```
-For example, with Google Analytics you may want to place HTML ID's in your templates, for the sole purpose of triggering analytics events. In this case, you definitely need some kind of protection against accidental deletion. 
-```
+*For example, with Google Analytics you may want to place HTML ID's in your templates, for the sole purpose of triggering analytics events. In this case, you definitely need some kind of protection against accidental deletion.*
 
 ## Install
 

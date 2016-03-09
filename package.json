@@ -11,6 +11,12 @@
     "type": "git",
     "url": "git+https://github.com/CAPSLOCKUSER/gulp-checklist.git"
   },
+  "keywords": [
+    "gulp",
+    "testing",
+    "contains",
+    "analytics"
+  ],
   "author": "Miklos Megyes <m.miklos05@gmail.com>",
   "license": "MIT",
   "bugs": {
