@@ -15,7 +15,9 @@
     "gulp",
     "testing",
     "contains",
-    "analytics"
+    "analytics",
+    "string",
+    "gulpplugin"
   ],
   "author": "Miklos Megyes <m.miklos05@gmail.com>",
   "license": "MIT",
