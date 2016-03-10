@@ -14,22 +14,22 @@ $ npm install --save-dev gulp-checklist
 
 ## Usage
 
-The following code will throw an error if an important ID is deleted.
+The following code will throw an error if an important ID is missing.
 
 ```js
 var gulp = require('gulp');
 var checklist = require('gulp-checklist');
 
 gulp.task('default', function () {
-	gulp.src('./src/**/*.html')
-		.pipe(checklist({
-		    list: ['VeryImportantID', 'AnotherVeryImportantID'],
-		    wrap: 'id="*"'
-		}));
+  gulp.src('./src/**/*.html')
+    .pipe(checklist({
+      list: ['VeryImportantID', 'AnotherVeryImportantID'],
+      wrap: 'id="*"'
+    }));
 });
 ```
 
-Tip: Store your required strings in a JSON file, and simple get them with a `require('./ids.json')` call.
+*Tip:* Store your required strings in a JSON file, and simple get them with a `require('./ids.json')` call.
 
 ## License
 
