@@ -33,9 +33,14 @@ function gulpChecklist(params) {
 
   var notFound = _.map(search, _.clone);
 
-  return through.obj(function (file, enc, cb) {
+  function handleFinish(callback) {
+    onEnd(notFound, this);
+    callback();
+  }
+
+  return through.obj(function (file, enc, callback) {
     if (file.isNull()) {
-      cb(null, file);
+      callback(null, file);
       return;
     }
 
@@ -52,11 +57,8 @@ function gulpChecklist(params) {
       }
     });
 
-    cb(null, file);
-  }, function (cb) {
-    onEnd(notFound, this);
-    cb();
-  });
+    callback(null, file);
+  }, handleFinish);
 }
 
 module.exports = gulpChecklist;
